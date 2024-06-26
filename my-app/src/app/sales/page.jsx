@@ -31,7 +31,7 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://pets-shop-management.onrender.com/sales", {
+        const response = await fetch("http://localhost:5000/sales", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
