@@ -1,15 +1,32 @@
+// var mysql = require('mysql2');
+// const express = require('express');
+// const cors = require('cors');
+// const path = require('path');
+
+// const app = express();
+// const PORT = process.env.PORT || 5000; // Use the environment variable PORT or default to 5000
+
+// // Connection setup
+// app.use(cors());
+// app.use(express.json());
+// app.set('views', 'src');
+
+
+
+
 var mysql = require('mysql2');
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Use the environment variable PORT or default to 5000
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
+// connection setup
 
-// Connection setup
 app.use(cors());
 app.use(express.json());
-app.set('views', 'src');
+
+app.set("views", 'src');
 
 const connection = mysql.createConnection({
   host: process.env.MYSQL_HOST || 'localhost',
@@ -19,7 +36,7 @@ const connection = mysql.createConnection({
   database: process.env.MYSQL_DATABASE || 'pets',
 });
 
-// Connect to database
+// connect to database
 connection.connect((err) => {
   if (err) {
     console.error('Error connecting to database:', err.message);
@@ -28,184 +45,230 @@ connection.connect((err) => {
   console.log('Connected to database');
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'my-app/build')));
 
-// Define API routes
-app.post('/api/customers', (req, res) => {
+
+app.post("/customers", (req, res) => {
+
   connection.query('SELECT * FROM customers', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    console.log(results);
+
+    res.send({
+      results,
+    })
   });
+
+
 });
 
-app.post('/api/pets', (req, res) => {
+app.post("/pets", (req, res) => {
+
   connection.query('SELECT * FROM animals', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+
+    res.send({
+      results,
+    })
   });
+
+
 });
 
-app.post('/api/vet', (req, res) => {
+
+app.post("/vet", (req, res) => {
+
   connection.query('SELECT * FROM vet_service', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    console.log(results);
+
+    res.send({
+      results,
+    })
   });
+
+
 });
 
-app.post('/api/sales', (req, res) => {
+
+app.post("/sales", (req, res) => {
   let r = [];
-  let r2 = [];
+  let r2 =[];
+
   connection.query('SELECT * FROM petting', (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).send('Error fetching data');
-      return;
-    }
-    r = results;
-    connection.query('SELECT SUM(cost) AS pro FROM petting', (err, results) => {
       if (err) {
-        console.error('Error executing query:', err);
-        res.status(500).send('Error fetching data');
-        return;
+          console.error('Error executing query:', err);
+          res.status(500).send('Error fetching data');
+          return;
       }
-      r2 = results;
-      res.send({ r, r2 });
-    });
+      r = results;
+      // After the first query completes, execute the second query
+      connection.query("SELECT SUM(cost) AS pro FROM petting", (err, results) => {
+          if (err) {
+              console.error('Error executing query:', err);
+              res.status(500).send('Error fetching data');
+              return;
+          }
+          r2 = results;
+          // Once both queries are completed, send the response
+          console.log(r2);
+          res.send({
+              r,
+              r2
+          });
+      });
   });
 });
 
-app.post('/api/caretaker', (req, res) => {
+app.post("/caretaker", (req, res) => {
+
   connection.query('SELECT * FROM caretaker', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    console.log(results);
+
+    res.send({
+      results,
+    })
   });
+
+
 });
 
-app.post('/api/phone', (req, res) => {
-  connection.query('SELECT number FROM phone_no WHERE customer_id = ?', [req.body.customerId], (err, results) => {
+app.post("/phone", (req, res) => {
+
+  console.log("yes")
+
+  connection.query('SELECT number FROM phone_no where customer_id=' + req.body.customerId, (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    console.log(results);
+
+    res.send({
+      results,
+    })
   });
 });
 
-app.post('/api/food', (req, res) => {
-  connection.query('SELECT * FROM food_suitable WHERE pet_id = ?', [req.body.pet_id], (err, results) => {
+app.post("/food", (req, res) => {
+  connection.query('SELECT * FROM food_suitable where pet_id=' + req.body.pet_id, (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    res.send({
+      results,
+    })
   });
 });
 
-app.post('/api/notify', (req, res) => {
+
+
+app.post("/notify", (req, res) => {
+  console.log('hi');
   connection.query('SELECT * FROM notify', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error fetching data');
       return;
     }
-    res.send({ results });
+    console.log(results);
+
+    res.send({
+      results,
+    })
   });
 });
 
-app.post('/api/customers', (req, res) => {
-  const { age, gender, name, address, customer_id } = req.body;
+app.post("/api/customers", (req, res) => {
+  const { age, gender, name, address ,customer_id} = req.body;
   if (!age || !gender || !name || !address) {
-    return res.status(400).json({ error: 'Missing required fields' });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const query = 'INSERT INTO customers (customer_id, age, gender, name, address) VALUES (?, ?, ?, ?, ?)';
-  connection.query(query, [customer_id, age, gender, name, address], (error, results) => {
-    if (error) {
-      console.error('Error inserting customer:', error);
-      return res.status(500).json({ error: 'Failed to insert customer' });
-    }
-
+  const query = 'INSERT INTO customers (customer_id,age, gender, name, address) VALUES (?,?, ?, ?, ?)';
+  connection.query(query, [customer_id,age, gender, name, address], (error, results, fields) => {
+    
     const phoneNumbers = req.body.numbers.map(number => [customer_id, number]);
-    connection.query('INSERT INTO phone_no (customer_id, number) VALUES ?', [phoneNumbers], (error) => {
-      if (error) {
-        console.error('Error inserting phone numbers:', error);
-        return res.status(500).json({ error: 'Failed to insert phone numbers' });
-      }
-    });
 
-    res.status(201).json({ message: 'Customer created successfully' });
-  });
-});
+      connection.query('INSERT INTO phone_no (customer_id, number) VALUES ?', [phoneNumbers], function (error, results, fields) {
+            
+      })
 
-app.post('/api/animals', (req, res) => {
-  const { type, breed, weight, age, id, gender, sold } = req.body;
-  if (!type || !breed || !weight || !age || !id || !gender) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const query = 'INSERT INTO animals (typed, breed, weight, age, pet_id, gender, sold) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  connection.query(query, [type, breed, weight, age, id, gender, sold], (error, results) => {
     if (error) {
-      console.error('Error inserting animal:', error);
-      return res.status(500).json({ error: 'Failed to insert animal' });
+      console.error("Error inserting customer:", error);
+      return res.status(500).json({ error: "Failed to insert customer" });
     }
 
-    const food_suitable = req.body.food_suitable.map(item => [id, item]);
-    connection.query('INSERT INTO food_suitable (pet_id, suitable) VALUES ?', [food_suitable], (error) => {
-      if (error) {
-        console.error('Error inserting food suitable:', error);
-        return res.status(500).json({ error: 'Failed to insert food suitable' });
-      }
-    });
+    res.status(201).json({ message: "Customer created successfully" });
+  });
 
-    res.status(201).json({ message: 'Animal created successfully' });
+  
+
+});
+
+app.post("/api/animals", (req, res) => {
+  const { type, breed, weight, age ,id,gender,sold} = req.body;
+  console.log('hi');
+  if (!type || !breed || !weight || !age || !id || !gender) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const query = 'INSERT INTO animals (typed, breed, weight, age ,pet_id,gender,sold) VALUES (?,?,?,?, ?, ?, ?)';
+  connection.query(query, [type, breed, weight, age ,id,gender,sold], (error, results, fields) => {
+    
+    const food_suitable = req.body.food_suitable.map(item => [id, item]);
+
+      connection.query('INSERT INTO food_suitable (pet_id, suitable) VALUES ?', [food_suitable], function (error, results, fields) {
+        console.log('aisehi');
+      })
+
+    if (error) {
+      console.error("Error inserting customer:", error);
+      return res.status(500).json({ error: "Failed to insert customer" });
+    }
+
+    res.status(201).json({ message: "Customer created successfully" });
   });
 });
 
-app.post('/api/transactions', (req, res) => {
-  const { animalId, customerId, cost, date } = req.body;
+app.post("/api/transactions",(req,res)=>{
+  const { animalId, customerId, cost, date} = req.body;
+
+  // animalId: "",
+  //   customerId: "",
+  //   cost: "",
+  //   date: "",
 
   connection.query('INSERT INTO petting (pet_id, customer_id, cost, bought_date) VALUES (?, ?, ?, ?)', 
   [animalId, customerId, cost, date], 
-  (error, results) => {
-    if (error) {
-      console.error('Error inserting transaction:', error);
-      return res.status(500).json({ error: 'Failed to insert transaction' });
-    }
-    res.status(201).json({ message: 'Transaction created successfully' });
+  function (error, results, fields) {
+    if (error) throw error;
+    console.log('Inserted successfully');
   });
-});
+  res.status(201).json({ message: "animal sold created successfully" });
+})
 
-// Catch all other routes and return the React app's index.html file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'my-app/build', 'index.html'));
-});
 
-// Close connection on process exit
+// close connection on process exit
 process.on('exit', () => {
   connection.end();
-});
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
 });
