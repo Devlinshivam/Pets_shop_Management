@@ -18,7 +18,7 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/caretaker", {
+        const response = await fetch("https://pets-shop-management.onrender.com/caretaker", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

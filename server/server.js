@@ -1,17 +1,3 @@
-// var mysql = require('mysql2');
-// const express = require('express');
-// const cors = require('cors');
-// const path = require('path');
-
-// const app = express();
-// const PORT = process.env.PORT || 5000; // Use the environment variable PORT or default to 5000
-
-// // Connection setup
-// app.use(cors());
-// app.use(express.json());
-// app.set('views', 'src');
-
-
 
 
 var mysql = require('mysql2');
@@ -44,8 +30,6 @@ connection.connect((err) => {
   }
   console.log('Connected to database');
 });
-
-
 
 app.post("/customers", (req, res) => {
 

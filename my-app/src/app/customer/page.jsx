@@ -19,7 +19,7 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/customers", {
+        const response = await fetch("https://pets-shop-management.onrender.com/customers", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export default function BasicTable() {
   const handlePhoneNumberChange = async (customerId) => {
     
     try {
-      const response = await fetch("http://localhost:5000/phone", {
+      const response = await fetch("https://pets-shop-management.onrender.com/phone", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

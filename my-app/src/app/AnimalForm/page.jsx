@@ -33,7 +33,7 @@ const AnimalForm = () => {
     e.preventDefault();
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:5000/api/animals", {
+      const response = await fetch("https://pets-shop-management.onrender.com/api/animals", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

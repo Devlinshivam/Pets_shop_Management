@@ -25,7 +25,7 @@ const CustomerForm = () => {
     e.preventDefault();
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:5000/api/customers", {
+      const response = await fetch("https://pets-shop-management.onrender.com/api/customers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
