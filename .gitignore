@@ -1,8 +1,6 @@
 /node_modulesnode_modules
 /my-app/node_modules
-/my-app/node_modules
-/my-app/node_modules
 node_modules
 /server/node_modules
 /node_modules
-.vercel
+

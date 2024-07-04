@@ -37,9 +37,12 @@ function Navbar() {
     <div className="py-0">
       <header class="text-gray-400 bg-gray-900 body-font ">
         <div class="container mx-20 flex flex-wrap p-5 flex-row justify-center items-center">
-          <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-            <Image src="/petshop.svg" alt="background image" className="w-full" width={50} height={50} />
-          </a>
+          <div className="flex title-font mx-0 font-medium items-center text-white mb-4 md:mb-0">
+            <a href="/" className="flex items-center">
+              <Image src="/petshop.svg" alt="background image" width={100} height={100} />
+            </a>
+            <HoveredLink href="/">.</HoveredLink>
+          </div>
           <nav class=" flex flex-wrap items-center mx-auto text-l justify-center">
             <Menu >
 

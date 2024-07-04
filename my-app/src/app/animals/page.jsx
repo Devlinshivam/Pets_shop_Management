@@ -66,7 +66,7 @@ export default function BasicTable() {
   };
 
   return (
-    <div className="mx-10 py-10 my-20">
+    <div className="mx-10 py-5 my-5">
       <div className="max-w-5xl relative flex flex-col items-center justify-center mx-auto mb-10  w-full  ">
         <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
           Animals Details
