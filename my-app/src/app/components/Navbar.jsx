@@ -52,33 +52,34 @@ function Navbar() {
               }}>
                 <MenuItem active={active} item="Animals">
                   <div className="flex flex-col  text-base">
-                    <HoveredLink href="/Animals">Animals</HoveredLink></div>
+                    {/* <HoveredLink href="/Animals">Animals</HoveredLink> */}
+                    </div>
                 </MenuItem>
               </div>
               <div onClick={() => {
                 if (active === "Customer") setActive(null)
                 else {
                   setActive("Customer");
-                  <HoveredLink href="/Customer">Customer details</HoveredLink>
+                  // <HoveredLink href="/Customer">Customer details</HoveredLink>
                 }
 
               }}>
                 <MenuItem active={active} item="Customer">
                   <div className="flex flex-col  text-base">
-                    <HoveredLink href="/Customer">Customer details</HoveredLink>
+                    {/* <HoveredLink href="/Customer">Customer details</HoveredLink> */}
                   </div>
                 </MenuItem>
               </div>
               <div onClick={() => {
                 if (active === "Sales") setActive(null)
                 else {
-                  <HoveredLink href="/Sales">Sales Details</HoveredLink>
+                  // <HoveredLink href="/Sales">Sales Details</HoveredLink>
                 }
                 setActive("Sales");
               }}>
                 <MenuItem active={active} item="Sales">
                   <div className="flex flex-col  text-base">
-                    <HoveredLink href="/Sales">Sales Details</HoveredLink>
+                    {/* <HoveredLink href="/Sales">Sales Details</HoveredLink> */}
 
                   </div>
                 </MenuItem>
@@ -89,7 +90,7 @@ function Navbar() {
               }}>
                 <MenuItem active={active} item="Caretaker">
                   <div className="flex flex-col  text-base">
-                    <HoveredLink href="/Caretaker">Caretaker details</HoveredLink>
+                    {/* <HoveredLink href="/Caretaker">Caretaker details</HoveredLink> */}
 
                   </div>
                 </MenuItem>
@@ -100,7 +101,7 @@ function Navbar() {
               }}>
                 <MenuItem active={active} item="Veiternary">
                   <div className="flex flex-col space-y-4 text-base">
-                    <HoveredLink href="/Veiternary">Veiternary</HoveredLink>
+                    {/* <HoveredLink href="/Veiternary">Veiternary</HoveredLink> */}
                   </div>
                 </MenuItem>
               </div>
