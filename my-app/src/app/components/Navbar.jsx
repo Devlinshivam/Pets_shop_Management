@@ -53,7 +53,7 @@ function Navbar() {
                 <MenuItem active={active} item="Animals">
                   <div className="flex flex-col  text-base">
                     {/* <HoveredLink href="/Animals">Animals</HoveredLink> */}
-                    </div>
+                  </div>
                 </MenuItem>
               </div>
               <div onClick={() => {
@@ -134,7 +134,7 @@ function Navbar() {
                 Notifications
               </div>
               {Rows.map((row, index) => (
-                <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                <div key={row.pet_id} className="divide-y divide-gray-100 dark:divide-gray-700">
                   <div className="w-full ps-3">
                     <div className="text-gray-900 text-sm mb-1.5 dark:text-gray-400">
                       <span className="font-semibold text-gray-900 dark:text-white">Pet-id:{row.pet_id}</span>: {row.work}
